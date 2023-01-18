@@ -43,7 +43,7 @@ class DbStudentManager {
 
   Future<int> updateStudent(BuilderPerson builderPerson) async {
     await openDb();
-    return await _database!.update('student', builderPerson.toMap(),
+    return await _database!.update('name', builderPerson.toMap(),
         where: "id = ?", whereArgs: [builderPerson.id]);
   }
 
@@ -73,7 +73,7 @@ class BuilderPerson {
       this.schoolName,
       this.degreeName);
 
-  // Student({@required this.name, @required this., this.id});
+
   Map<String, dynamic> toMap() {
     return {
       'name': name, 'email': email, 'phone': phone, 'eduDate': eduDate,
