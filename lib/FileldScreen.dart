@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'Database/dbmanager.dart';
+
 class FieldScreen extends StatefulWidget {
   const FieldScreen({Key? key}) : super(key: key);
 
@@ -22,6 +24,8 @@ class _FieldScreenState extends State<FieldScreen>
   final _hobbiesController = TextEditingController();
   final _formKey = new GlobalKey<FormState>();
   TabController? _tabController;
+
+  final DbBuilder dbmanager = DbBuilder();
 
   @override
   void initState() {
@@ -215,89 +219,21 @@ class _FieldScreenState extends State<FieldScreen>
                 ),
               ],
             ))
-            // Container(
-            //   height: 50,
-            //   child: ListView.builder(
-            //       padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-            //       shrinkWrap: true,
-            //       physics: const ClampingScrollPhysics(),
-            //       // itemCount: 20,
-            //       itemCount: lstmodel.length,
-            //       scrollDirection: Axis.horizontal,
-            //       itemBuilder: (BuildContext context, int index) {
-            //         return InkWell(
-            //           onTap: () {
-            //             // NavigatorHelper.openDialog(BookingDetails());
-            //           },
-            //           child: Padding(
-            //             padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-            //             child: Text(lstmodel[index].name ?? ""),
-            //           ),
-            //         );
-            //       }),
-            // ),
-            // Container(
-            //   width: MediaQuery.of(context).size.width,
-            //   height: 1,
-            //   color: Colors.grey,
-            // ),
-            // Container(
-            //   child: Form(
-            //     key: _formKey,
-            //     child: Padding(
-            //       padding: const EdgeInsets.fromLTRB(20,10,20,20),
-            //       child: Column(
-            //         children: [
-            //           TextFormField(
-            //             decoration: new InputDecoration(labelText: 'Name'),
-            //             controller: _nameController,
-            //             validator: (val) =>
-            //                 val!.isNotEmpty ? null : 'Name Should Not Be empty',
-            //           ),
-            //           TextFormField(
-            //             decoration: new InputDecoration(labelText: 'Email'),
-            //             controller: _emailController,
-            //             validator: (val) =>
-            //                 val!.isNotEmpty ? null : 'Course Should Not Be empty',
-            //           ),
-            //           SizedBox(height: 20,),
-            //           InkWell(
-            //             onTap: () {
-            //               setState(() {
-            //                 Navigator.push(
-            //                   context,
-            //                   MaterialPageRoute(
-            //                       builder: (context) => const FieldScreen()),
-            //                 );
-            //               });
-            //             },
-            //             child: Container(
-            //                 padding: EdgeInsets.all(10),
-            //                 decoration: const BoxDecoration(
-            //                   color: Colors.blueGrey,
-            //                     // borderRadius: Radius.circular(15),
-            //                     // boxShadow: [
-            //                     //   BoxShadow(
-            //                     //     color: Colors.black,
-            //                     //     blurRadius: 10.0,
-            //                     //     spreadRadius: 0.5,
-            //                     //   ),
-            //                     // ]
-            //                 ),
-            //                 child: Center(
-            //                   child: const Text(
-            //                     "Next",
-            //                     style: TextStyle(
-            //                         color: Colors.white, fontSize: 16),
-            //                   ),
-            //                 )),
-            //           )
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            // )
+
           ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        backgroundColor: Colors.green,
+        child:  Row(mainAxisSize: MainAxisSize.min,
+        children: [
+          Text("View Resume"),
+          SizedBox(width: 15,),
+          Icon(Icons.remove_red_eye)
+        ],
         ),
       ),
     );
