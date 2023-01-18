@@ -30,8 +30,8 @@ class DbBuilder {
   //       'builderPerson');
   //   return List.generate(maps.length, (i) {
   //     return BuilderPerson(
-  //       id: maps[i]['id'],
-  //       name: maps[i]['name'],
+  //       id: maps[i]['id'] ?? 0,
+  //       name: maps[i]['name'] ?? "",
   //       email: maps[i]['email'],
   //       phone: maps[i]['phone'],
   //       eduDate: maps[i]['eduDate'],
@@ -41,13 +41,13 @@ class DbBuilder {
   //   });
   // }
 
-  Future<int> updateStudent(BuilderPerson builderPerson) async {
+  Future<int> updateResume(BuilderPerson builderPerson) async {
     await openDb();
     return await _database!.update('name', builderPerson.toMap(),
         where: "id = ?", whereArgs: [builderPerson.id]);
   }
 
-  Future<void> deleteStudent(int id) async {
+  Future<void> deleteResume(int id) async {
     await openDb();
     await _database!.delete(
         'builderPerson',

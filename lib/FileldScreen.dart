@@ -26,6 +26,9 @@ class _FieldScreenState extends State<FieldScreen>
   TabController? _tabController;
 
   final DbBuilder dbmanager = DbBuilder();
+  BuilderPerson? builderPerson;
+  List<BuilderPerson>? resumelist;
+  late int updateIndex;
 
   @override
   void initState() {
@@ -54,8 +57,14 @@ class _FieldScreenState extends State<FieldScreen>
         backgroundColor: Colors.white,
       ),
       body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+        height: MediaQuery
+            .of(context)
+            .size
+            .height,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -86,139 +95,165 @@ class _FieldScreenState extends State<FieldScreen>
             ),
             Expanded(
                 child: TabBarView(
-              controller: _tabController,
-              children: <Widget>[
-                Container(
-                  child: Form(
-                    key: _formKey,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            decoration: new InputDecoration(labelText: 'Name'),
-                            controller: _nameController,
-                            validator: (val) => val!.isNotEmpty
-                                ? null
-                                : 'Name Should Not Be empty',
+                  controller: _tabController,
+                  children: <Widget>[
+                    Container(
+                      child: Form(
+                        key: _formKey,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                decoration: new InputDecoration(
+                                    labelText: 'Name'),
+                                controller: _nameController,
+                                validator: (val) =>
+                                val!.isNotEmpty
+                                    ? null
+                                    : 'Name Should Not Be empty',
+                              ),
+                              TextFormField(
+                                decoration: new InputDecoration(
+                                    labelText: 'Email'),
+                                controller: _emailController,
+                                validator: (val) =>
+                                val!.isNotEmpty
+                                    ? null
+                                    : 'Course Should Not Be empty',
+                              ),
+                              TextFormField(
+                                decoration: new InputDecoration(
+                                    labelText: 'Phone'),
+                                controller: _phoneController,
+                                validator: (val) =>
+                                val!.isNotEmpty
+                                    ? null
+                                    : 'Course Should Not Be empty',
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              MaterialButton(
+                                  child: Text("Next"),
+                                  color: Colors.grey,
+                                  onPressed: () {})
+                            ],
                           ),
-                          TextFormField(
-                            decoration: new InputDecoration(labelText: 'Email'),
-                            controller: _emailController,
-                            validator: (val) => val!.isNotEmpty
-                                ? null
-                                : 'Course Should Not Be empty',
-                          ),
-                          TextFormField(
-                            decoration: new InputDecoration(labelText: 'Phone'),
-                            controller: _phoneController,
-                            validator: (val) => val!.isNotEmpty
-                                ? null
-                                : 'Course Should Not Be empty',
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          MaterialButton(
-                              child: Text("Next"),
-                              color: Colors.grey,
-                              onPressed: () {})
-                        ],
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Container(
-                  child: Form(
-                    key: _formKey,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            decoration: new InputDecoration(labelText: 'Date'),
-                            controller: _eduDateController,
-                            validator: (val) => val!.isNotEmpty
-                                ? null
-                                : 'Name Should Not Be empty',
-                          ),
-                          TextFormField(
-                            decoration:
+                    Container(
+                      child: Form(
+                        key: _formKey,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                decoration: new InputDecoration(
+                                    labelText: 'Date'),
+                                controller: _eduDateController,
+                                validator: (val) =>
+                                val!.isNotEmpty
+                                    ? null
+                                    : 'Name Should Not Be empty',
+                              ),
+                              TextFormField(
+                                decoration:
                                 new InputDecoration(labelText: 'School Name'),
-                            controller: _schoolNameController,
-                            validator: (val) => val!.isNotEmpty
-                                ? null
-                                : 'Course Should Not Be empty',
-                          ),
-                          TextFormField(
-                            decoration:
+                                controller: _schoolNameController,
+                                validator: (val) =>
+                                val!.isNotEmpty
+                                    ? null
+                                    : 'Course Should Not Be empty',
+                              ),
+                              TextFormField(
+                                decoration:
                                 new InputDecoration(labelText: 'Degree name'),
-                            controller: _degreeNameController,
-                            validator: (val) => val!.isNotEmpty
-                                ? null
-                                : 'Course Should Not Be empty',
+                                controller: _degreeNameController,
+                                validator: (val) =>
+                                val!.isNotEmpty
+                                    ? null
+                                    : 'Course Should Not Be empty',
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              MaterialButton(
+                                  child: Text("Next"),
+                                  color: Colors.grey,
+                                  onPressed: () {})
+                            ],
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          MaterialButton(
-                              child: Text("Next"),
-                              color: Colors.grey,
-                              onPressed: () {})
-                        ],
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Container(
-                  child: Form(key: _formKey,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20,0,20,20),
-                      child: Column(children: [
-                        TextFormField(
-                          decoration: new InputDecoration(labelText: 'Company Name'),
-                          controller: _companyNameController,
-                          validator: (val) =>
-                          val!.isNotEmpty ? null : 'Name Should Not Be empty',
+                    Container(
+                      child: Form(key: _formKey,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                          child: Column(children: [
+                            TextFormField(
+                              decoration: new InputDecoration(
+                                  labelText: 'Company Name'),
+                              controller: _companyNameController,
+                              validator: (val) =>
+                              val!.isNotEmpty
+                                  ? null
+                                  : 'Name Should Not Be empty',
+                            ),
+                            TextFormField(
+                              decoration: new InputDecoration(
+                                  labelText: 'Date'),
+                              controller: _companydtNameController,
+                              validator: (val) =>
+                              val!.isNotEmpty
+                                  ? null
+                                  : 'Course Should Not Be empty',
+                            ),
+                            TextFormField(
+                              decoration: new InputDecoration(
+                                  labelText: 'Roll'),
+                              controller: _rollNameController,
+                              validator: (val) =>
+                              val!.isNotEmpty
+                                  ? null
+                                  : 'Course Should Not Be empty',
+                            ),
+                            SizedBox(height: 20,),
+                            MaterialButton(child: Text("Next"),
+                                color: Colors.grey,
+                                onPressed: () {})
+                          ],),
                         ),
-                        TextFormField(
-                          decoration: new InputDecoration(labelText: 'Date'),
-                          controller: _companydtNameController,
-                          validator: (val) =>
-                          val!.isNotEmpty ? null : 'Course Should Not Be empty',
-                        ),
-                        TextFormField(
-                          decoration: new InputDecoration(labelText: 'Roll'),
-                          controller: _rollNameController,
-                          validator: (val) =>
-                          val!.isNotEmpty ? null : 'Course Should Not Be empty',
-                        ),
-                        SizedBox(height: 20,),
-                        MaterialButton(child: Text("Next"),color: Colors.grey,onPressed: () {})
-                      ],),
+                      ),
                     ),
-                  ),
-                ),
-                Container(
-                  child: Form(key: _formKey,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20,0,20,20),
-                      child: Column(children: [
-                        TextFormField(
-                          decoration: new InputDecoration(labelText: 'Hobbies'),
-                          controller: _hobbiesController,
-                          validator: (val) =>
-                          val!.isNotEmpty ? null : 'Name Should Not Be empty',
-                        ),
+                    Container(
+                      child: Form(key: _formKey,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                          child: Column(children: [
+                            TextFormField(
+                              decoration: new InputDecoration(
+                                  labelText: 'Hobbies'),
+                              controller: _hobbiesController,
+                              validator: (val) =>
+                              val!.isNotEmpty
+                                  ? null
+                                  : 'Name Should Not Be empty',
+                            ),
 
-                        SizedBox(height: 20,),
-                        MaterialButton(child: Text("Next"),color: Colors.grey,onPressed: () {})
-                      ],),
+                            SizedBox(height: 20,),
+                            MaterialButton(child: Text("Next"),
+                                color: Colors.grey,
+                                onPressed: () {})
+                          ],),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ],
-            ))
+                  ],
+                ))
 
           ],
         ),
@@ -228,14 +263,56 @@ class _FieldScreenState extends State<FieldScreen>
           // Add your onPressed code here!
         },
         backgroundColor: Colors.green,
-        child:  Row(mainAxisSize: MainAxisSize.min,
-        children: [
-          Text("View Resume"),
-          SizedBox(width: 15,),
-          Icon(Icons.remove_red_eye)
-        ],
+        child: Row(mainAxisSize: MainAxisSize.min,
+          children: [
+            Text("View Resume"),
+            SizedBox(width: 15,),
+            Icon(Icons.remove_red_eye)
+          ],
         ),
       ),
     );
   }
 }
+//   void _submitResume(BuildContext context) {
+//     if(_formKey.currentState!.validate()){
+//       if(builderPerson==null) {
+//         BuilderPerson bp =  BuilderPerson();
+//           // (
+//           // // name: _nameController.text,
+//           // //   email: _emailController.text,
+//           // //   phone = _phoneController.text,
+//           // //   eduDate =_eduDateController.text,
+//           // //   schoolName= _schoolNameController.text,
+//           // //   degreeName = _degreeNameController.text,
+//           //
+//           //         );
+//         dbmanager.insertBuilderPerson(bp).then((id)=>{
+//           _nameController.clear(),
+//           _emailController.clear(),
+//           print('Student Added to Db ${id}')
+//         });
+//       } else {
+//         builderPerson!.name = _nameController.text;
+//         builderPerson!.email = _emailController.text;
+//         builderPerson!.phone = _phoneController.text;
+//         builderPerson!.eduDate =_eduDateController.text;
+//         builderPerson!.schoolName= _schoolNameController.text;
+//         builderPerson!.degreeName = _degreeNameController.text;
+//
+//
+//         dbmanager.updateResume(builderPerson!).then((id) =>{
+//           setState((){
+//             resumelist![updateIndex].name = _nameController.text;
+//             resumelist![updateIndex].email= _emailController.text;
+//           }),
+//           _nameController.clear(),
+//           _emailController.clear(),
+//           builderPerson=null
+//         });
+//       }
+//     }
+//   }
+// }
+
+
