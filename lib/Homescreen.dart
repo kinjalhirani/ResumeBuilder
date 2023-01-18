@@ -44,7 +44,13 @@ class _HomeScreenState extends State<HomeScreen> {
             Center(
               child: InkWell(
                 onTap: () {
-                  NavigatorHelper.add(FieldScreen());
+                 setState(() {
+                   Navigator.push(
+                     context,
+                     MaterialPageRoute(builder: (context) => const FieldScreen()),
+                   );
+                   // NavigatorHelper.add(const FieldScreen());
+                 });
                 },
                 child: Container(
                     padding: EdgeInsets.all(10),
