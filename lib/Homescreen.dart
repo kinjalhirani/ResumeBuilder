@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:resumeuilder/FileldScreen.dart';
+import 'package:resumeuilder/NavigationHelper.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -40,32 +42,37 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 20,
             ),
             Center(
-              child: Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: const BoxDecoration(color: Colors.white,
-                      // borderRadius: Radius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black,
-                          blurRadius: 10.0,
-                          spreadRadius: 0.5,
+              child: InkWell(
+                onTap: () {
+                  NavigatorHelper.add(FieldScreen());
+                },
+                child: Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: const BoxDecoration(color: Colors.white,
+                        // borderRadius: Radius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black,
+                            blurRadius: 10.0,
+                            spreadRadius: 0.5,
+                          ),
+                        ]),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          "Create Resume",
+                          style: TextStyle(color: Colors.black, fontSize: 16),
                         ),
-                      ]),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text(
-                        "Create Resume",
-                        style: TextStyle(color: Colors.black, fontSize: 16),
-                      ),
-                      SizedBox(width: 20,),
-                      Icon(
-                        Icons.arrow_right_alt_rounded,
-                        color: Colors.black,
-                        size: 15,
-                      )
-                    ],
-                  )),
+                        SizedBox(width: 20,),
+                        Icon(
+                          Icons.arrow_right_alt_rounded,
+                          color: Colors.black,
+                          size: 15,
+                        )
+                      ],
+                    )),
+              ),
             ),
           ],
         ),
